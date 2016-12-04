@@ -38,3 +38,11 @@
 .overview {
     font-size: large;
 }
+
+.collapseButton
+{
+    width:100%;
+    text-align:center;
+    margin-bottom:10px
+
+}

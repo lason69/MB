@@ -3,11 +3,20 @@
 
     angular
         .module('app')
-        .controller('Main', MainController);
+        .controller('Main',['$location', MainController]);
 
-    function MainController() {
+    function MainController($location) {
         var vm = this;
-        vm.food = 'pizza';
+        vm.movieID = 279;
+
+
+        vm.go = function () {
+            console.log("jestem");
+            $location.path("/app/movieDetail/"+vm.movieID);
+        };
+
+
+
     }
 
 })();
