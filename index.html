@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <base href="/">
+    <title></title>
+</head>
+<body ng-controller="Main as vm">
+    asdsd
+    <a href="/app/movieDetail/23">xasdads</a> 
+ 
+
+
+    <input type="text" ng-model="vm.food" placeholder="Enter food" />
+
+    <p>Sriracha sauce is great with {{vm.food}}!</p>
+    <div ng-view ></div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="//code.angularjs.org/1.5.8/angular-route.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/Main.js"></script>
+</body>
+</html>
