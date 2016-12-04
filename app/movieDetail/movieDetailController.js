@@ -3,79 +3,56 @@
 
     angular
         .module('app')
-          .controller('movieDetailController', [ '$http', '$q', '$routeParams', 'movieDetailService', movieDetailController])
+          .controller('movieDetailController', ['$scope', '$http', '$q', '$routeParams', 'movieDetailService', movieDetailController])
 
 
 
-    function movieDetailController($http, $q, $routeParams, movieDetailService) {
-        var vm = this;
+    function movieDetailController($scope, $http, $q, $routeParams, movieDetailService) {
+    
         this.params = $routeParams;
         console.log(this.params.movieID)
         
-        vm.movieID = this.params.movieID;
+        $scope.movieID = this.params.movieID;
         fillMovie();
         fillCast();
-        vm.collapsed = false;
+        $scope.collapsed = false;
 
         function fillMovie() {
-           getMovie().then(function (model) {
+            //movieDetailService.getMovie().then(function (model) {
+            $scope.test = movieDetailService.Movie();
+           // console.log($scope.test);
+            
+            //    $scope.Movie = model;
 
-               vm.Movie = model;
-
-            })
+            //})
         }
         function fillCast() {
-            getAllCast().then(function (model) {
+            //$scope.Cast = movieDetailService.getAllCast.cast;
+            //console.log($scope.Cast);
 
-                vm.Cast = model.cast;
-                vm.Crew = model.crew;
-                console.log(model);
-            })
+            //    $scope.Cast = model.cast;
+            //    $scope.Crew = model.crew;
+            //    console.log(model);
+            //})
         }
-        vm.getCast = function () {
-            return vm.Cast.slice(0, 6);
+        $scope.getCast = function () {
+            return $scope.Cast.slice(0, 6);
         }
-        vm.getRestCast = function () {
-            console.log(vm.collapsed);
-            if (vm.collapsed) {
-                vm.collapsed = false;
+        $scope.getRestCast = function () {
+            console.log($scope.collapsed);
+            if ($scope.collapsed) {
+                $scope.collapsed = false;
                 return;
             }
-            vm.RestCast = vm.Cast.slice(6, vm.Cast.length - 1)
-            vm.collapsed = true;
-            return vm.RestCast;
+            $scope.RestCast = $scope.Cast.slice(6, $scope.Cast.length - 1)
+            $scope.collapsed = true;
+            return $scope.RestCast;
         }
 
-        function getMovie() {
-
- 
-
-            return $http.get('https://api.themoviedb.org/3/movie/' + vm.movieID + '?api_key=bc246856648f34ccdf9aef4b69a26470&language=en-US')
-            .then(function (data) {
-                return data.data
-               
-
-
-            }, function () {
-               
-            })
-            
-        }
-
-        function getAllCast() {
-            return $http.get('https://api.themoviedb.org/3/movie/' + vm.movieID + '/credits?api_key=bc246856648f34ccdf9aef4b69a26470&language=en-US')
-            .then(function (data) {
-                return data.data;
-
-
-            }, function () {
-              
-            })
-           
-        }
+      
 
         function collapseIcon() {
-            return (vm.collapsed) ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-up';
+            return ($scope.collapsed) ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-up';
         }
     }
  
