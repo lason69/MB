@@ -3,56 +3,50 @@
 
     angular
         .module('app')
-          .controller('movieDetailController', ['$scope', '$http', '$q', '$routeParams', 'movieDetailService', movieDetailController])
+        .controller('movieDetailController', [ '$http', '$q', '$routeParams', 'movieDetailService', movieDetailController])
 
 
 
-    function movieDetailController($scope, $http, $q, $routeParams, movieDetailService) {
-    
+    function movieDetailController($http, $q, $routeParams, movieDetailService) {
+        var vm = this;
+
         this.params = $routeParams;
-        console.log(this.params.movieID)
-        
-        $scope.movieID = this.params.movieID;
+        vm.movieID = this.params.movieID;
+
         fillMovie();
         fillCast();
-        $scope.collapsed = false;
+        vm.collapsed = false;
 
+        vm.checkCollapsed = function () {
+            console.log(vm.collapsed)
+            if (vm.collapsed) {
+                vm.collapsed = false;
+
+            }
+
+
+            vm.collapsed = true;
+
+        }
         function fillMovie() {
-            //movieDetailService.getMovie().then(function (model) {
-            $scope.test = movieDetailService.Movie();
-           // console.log($scope.test);
-            
-            //    $scope.Movie = model;
-
-            //})
+            movieDetailService.Movie(vm.movieID).then(function (model) {
+                vm.Movie = model;
+            })
+    
         }
         function fillCast() {
             //$scope.Cast = movieDetailService.getAllCast.cast;
             //console.log($scope.Cast);
-
-            //    $scope.Cast = model.cast;
-            //    $scope.Crew = model.crew;
-            //    console.log(model);
-            //})
+            movieDetailService.Cast(vm.movieID).then(function (model) {
+                vm.Cast = model.cast;
+                vm.Crew = model.crew;
+                vm.topCast = vm.Cast.slice(0, 6);
+                vm.RestCast = vm.Cast.slice(6, vm.Cast.length - 1)
+               
+            })
         }
-        $scope.getCast = function () {
-            return $scope.Cast.slice(0, 6);
-        }
-        $scope.getRestCast = function () {
-            console.log($scope.collapsed);
-            if ($scope.collapsed) {
-                $scope.collapsed = false;
-                return;
-            }
-            $scope.RestCast = $scope.Cast.slice(6, $scope.Cast.length - 1)
-            $scope.collapsed = true;
-            return $scope.RestCast;
-        }
-
-      
-
         function collapseIcon() {
-            return ($scope.collapsed) ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-up';
+            return (vm.collapsed) ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-up';
         }
     }
  

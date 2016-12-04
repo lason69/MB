@@ -12,30 +12,26 @@
             Cast: getAllCast
         }
 
-    };
-
-    function getMovie() {
-        console.log($http)
-        return $http.get('https://api.themoviedb.org/3/movie/' + 278 + '?api_key=bc246856648f34ccdf9aef4b69a26470&language=en-US')
+        function getMovie(MovieID) {
+      
+            return $http.get('https://api.themoviedb.org/3/movie/' + MovieID + '?api_key=bc246856648f34ccdf9aef4b69a26470&language=en-US')
             .then(function (data) {
+                console.log(data)
                 return data.data
-
-
-
             }, function () {
 
             })
         }
-    function getAllCast() {
-            return $http.get('https://api.themoviedb.org/3/movie/' + 278 + '/credits?api_key=bc246856648f34ccdf9aef4b69a26470&language=en-US')
+        function getAllCast(MovieID) {
+
+        return $http.get('https://api.themoviedb.org/3/movie/' + MovieID + '/credits?api_key=bc246856648f34ccdf9aef4b69a26470&language=en-US')
             .then(function (data) {
                 return data.data;
-
             }, function () {
 
             })
 
         }
     
-
+    };
 })()

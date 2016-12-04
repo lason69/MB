@@ -1,52 +1,47 @@
 ﻿<div class="row">
         <div class="col-sm-8">
-
-            <img class="gallery-image fade-animation img-rounded" ng-src="{{'http://image.tmdb.org/t/p/w600/'+Movie.backdrop_path}}" />
-
+            <img class="gallery-image fade-animation img-rounded" ng-src="{{'http://image.tmdb.org/t/p/w600/'+vm.Movie.backdrop_path}}" />
         </div>
+
         <div class="col-sm-4 overview">
-            <div class="row movie-Title">
-                {{Movie.title}} ({{Movie.release_date.slice(0,4)}})
+            <div class="row MovieTitle">
+                {{vm.Movie.title}} ({{vm.Movie.release_date.slice(0,4)}})
                 <br />
                 <div class="headlines">
-                    Director: <div class="dirgen">{{Crew[0].name}}</div><br />
-                    Genres: <div class="dirgen" ng-repeat="genre in Movie.genres">
+                    Director: <span class="dirgen">{{vm.Crew[0].name}}</span><br />
+                    Genres: <span class="dirgen" ng-repeat="genre in vm.Movie.genres">
                         [{{genre.name}}]
-                    </div>
-
+                    </span>
                 </div>
             </div>
-            <div class="overviewHeadline">
+            <span class="overviewHeadline">
                 Overview
-            </div>
-            {{Movie.overview}}
+            </span>
+            {{vm.Movie.overview}}
         </div>
-
-
     </div>
     <div class="row personList">
 
-        <div ng-repeat="person in getCast()">
+        <div ng-repeat="person in vm.topCast">
             <div class="col-sm-2">
-
                 <img class="img-rounded personPicture" ng-src="{{'http://image.tmdb.org/t/p/w300/'+person.profile_path}}" /><br />
-                <label class="personName"> {{person.name}}</label><br />
-                <label>{{person.character}}</label>
+                <span class="personName"> {{person.name}}</span><br />
+                <span>{{person.character}}</span>
             </div>
         </div>
 
     </div>
 
-    <button type="button" class="btn btn-default" style="width:100%;text-align:center;margin-bottom:10px" data-toggle="collapse" data-target="#moreCast" ng-click="getRestCast()">
-        <span class="glyphicon" ng-class="{'glyphicon-chevron-up' : collapsed, 'glyphicon-chevron-down' : !collapsed}"></span>
-    </button>
+    <button type="button" class="collapseButton btn btn-default" data-toggle="collapse" data-target="#moreCast" ng-click="vm.checkCollapsed()">
+    <span class="glyphicon" ng-class="{'glyphicon-chevron-up' : vm.collapsed, 'glyphicon-chevron-down' : !vm.collapsed}"></span>
+</button>
 
     <div id="moreCast" class="row personList collapse">
-        <div ng-repeat="person in RestCast">
+        <div ng-repeat="person in vm.RestCast">
             <div class="col-sm-2">
                 <img class="img-rounded personPicture" ng-src="{{'http://image.tmdb.org/t/p/w300/'+person.profile_path}}" /><br />
-                <label class="personName"> {{person.name}}</label><br />
-                <label>{{person.character}}</label>
+                <span class="personName"> {{person.name}}</span><br />
+                <span>{{person.character}}</span>
             </div>
         </div>
     </div>

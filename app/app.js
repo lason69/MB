@@ -16,7 +16,7 @@
              .when('/app/movieDetail/:movieID', {
                  templateUrl: 'app/movieDetail/movieDetail.html',
                  controller: 'movieDetailController',
-                 controllerAs: 'movieDetailController'
+                 controllerAs: 'vm'
              });
 
           $locationProvider.html5Mode(true);
