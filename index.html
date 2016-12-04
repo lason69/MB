@@ -3,16 +3,20 @@
 <head>
     <base href="/">
     <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="app/Site.css" />
+    <link rel="stylesheet" href="app/movieDetail/movieDetail.css" />
 </head>
 <body ng-controller="Main as vm">
-    asdsd
-    <a href="/app/movieDetail/23">xasdads</a> 
+
  
 
-
-    <input type="text" ng-model="vm.food" placeholder="Enter food" />
-
-    <p>Sriracha sauce is great with {{vm.food}}!</p>
+    <div style="margin-bottom:30px">
+        Type Movie ID<input type="text" ng-model="vm.movieID" placeholder="movie id" />
+        <button class="btn-default" ng-click="vm.go()">Search</button>
+    </div>
     <div ng-view ></div>
 
 
@@ -20,5 +24,8 @@
     <script src="//code.angularjs.org/1.5.8/angular-route.js"></script>
     <script src="app/app.js"></script>
     <script src="app/Main.js"></script>
+    <script src="app/movieDetail/movieDetailService.js"></script>
+    <script src="app/movieDetail/movieDetailController.js"></script>
+   
 </body>
 </html>
